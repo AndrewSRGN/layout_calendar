@@ -18,10 +18,6 @@ $calendar-gap: 1px;
   gap: $calendar-gap;
   width: calc($day-cell-width * 7 + $calendar-gap * 6);
   padding: 10px;
-  position: absolute;
-  left: 50%;
-  top: 50%;
-  transform: translate(-50%, -50%);
 
   @each $day, $index in $weekdays {
     &--start-day-#{$day} {
