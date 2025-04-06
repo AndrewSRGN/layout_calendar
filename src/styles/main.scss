@@ -15,13 +15,16 @@ $calendar-gap: 1px;
 .calendar {
   display: flex;
   flex-wrap: wrap;
-  flex-basis: $day-cell-width;
   gap: $calendar-gap;
   width: calc($day-cell-width * 7 + $calendar-gap * 6);
   padding: 10px;
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
 
   @each $day, $index in $weekdays {
-    &--#{$day} {
+    &--start-day-#{$day} {
       .calendar__day:first-child {
         margin-left: calc($index * ($day-cell-width + $calendar-gap));
       }
@@ -39,12 +42,15 @@ $calendar-gap: 1px;
   &__day {
     position: relative;
     box-sizing: border-box;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     width: $day-cell-width;
     height: $day-cell-height;
     border: 1px solid #000;
     background-color: #eee;
     cursor: pointer;
-    transition: transform 0.5s ease;
+    transition-duration: 0.5s;
 
     &:hover {
       background-color: #ffbfcb;
@@ -52,16 +58,8 @@ $calendar-gap: 1px;
     }
 
     @for $day from 1 through 31 {
-      &:nth-child(#{$day}) {
-        &::before {
-          content: '#{$day}';
-          position: absolute;
-          top: 50%;
-          left: 50%;
-          transform: translate(-50%, -50%);
-          font-family: Arial, sans-serif;
-          font-size: 30px;
-        }
+      &:nth-child(#{$day})::before {
+        content: '#{$day}';
       }
     }
   }
